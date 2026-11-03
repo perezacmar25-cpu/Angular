@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ episode.name }}</h4>
+    <button type="button" class="btn-close" (click)="activeModal.dismiss()"></button>
+  </div>
+
+  <div class="modal-body">
+    <p>
+      <span class="fw-semibold">Air Date:</span>
+      {{ episode.air_date }}
+    </p>
+    <p class="mb-0">
+      <span class="fw-semibold">Episode:</span>
+      <span class="badge text-bg-primary">{{ episode.episode }}</span>
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close()">Cerrar</button>
+  </div>

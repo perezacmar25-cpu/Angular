@@ -1,0 +1,17 @@
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h3 class="card-title mb-3">{{ episode()?.name }}</h3>
+
+    <p class="mb-2">
+      <span class="fw-semibold">Air Date:</span>
+      {{ episode()?.air_date }}
+    </p>
+
+    <p class="mb-3">
+      <span class="fw-semibold">Episode:</span>
+      <span class="badge text-bg-primary">{{ episode()?.episode }}</span>
+    </p>
+
+    <button class="btn btn-primary" (click)="emitEpisodeClicked()">Ver detalles</button>
+  </div>
+</div>
