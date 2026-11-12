@@ -1,11 +1,198 @@
-<form [formGroup] = "registerForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="row g-3">
 
-    <fieldset>
-        <legend>Formulario de Registro</legend>
-        <div>
-            <label for="firstName">Nombre:</label>
-            <input id="firstName" formControlName="firstName">
-            
+  <h4 class="col-12 mt-3">Datos personales</h4>
+
+  <div class="col-md-6">
+    <label for="first-name" class="form-label">Nombre <span class="text-danger">*</span></label>
+    <input id="first-name" type="text" formControlName="firstName" class="form-control"
+      [class.is-invalid]="isInvalidField('firstName')" />
+    @if (isInvalidField('firstName')) {
+      <div class="invalid-feedback">
+        @if (registerForm.get('firstName')?.hasError('required')) {
+          <div>El nombre es obligatorio</div>
+        }
+        @if (registerForm.get('firstName')?.hasError('minlength')) {
+          <div>Mínimo 2 caracteres</div>
+        }
+        @if (registerForm.get('firstName')?.hasError('maxlength')) {
+          <div>Máximo 30 caracteres</div>
+        }
+        @if (registerForm.get('firstName')?.hasError('pattern')) {
+          <div>Solo se permiten letras</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="col-md-6">
+    <label for="last-name" class="form-label">Apellidos <span class="text-danger">*</span></label>
+    <input id="last-name" type="text" formControlName="lastName" class="form-control"
+      [class.is-invalid]="isInvalidField('lastName')" />
+    @if (isInvalidField('lastName')) {
+      <div class="invalid-feedback">
+        @if (registerForm.get('lastName')?.hasError('required')) {
+          <div>Los apellidos son obligatorios</div>
+        }
+        @if (registerForm.get('lastName')?.hasError('minlength')) {
+          <div>Mínimo 2 caracteres</div>
+        }
+        @if (registerForm.get('lastName')?.hasError('maxlength')) {
+          <div>Máximo 50 caracteres</div>
+        }
+        @if (registerForm.get('lastName')?.hasError('pattern')) {
+          <div>Solo se permiten letras</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="col-md-6">
+    <label for="dni" class="form-label">DNI / NIE <span class="text-danger">*</span></label>
+    <input id="dni" type="text" formControlName="dni" class="form-control"
+      [class.is-invalid]="isInvalidField('dni')" />
+    @if (isInvalidField('dni')) {
+      <div class="invalid-feedback">
+        @if (registerForm.get('dni')?.hasError('required')) {
+          <div>El DNI/NIE es obligatorio</div>
+        }
+        @if (registerForm.get('dni')?.hasError('pattern')) {
+          <div>Formato no válido</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="col-md-6">
+    <label for="tel" class="form-label">Teléfono móvil <span class="text-danger">*</span></label>
+    <input id="tel" type="tel" formControlName="tel" class="form-control"
+      [class.is-invalid]="isInvalidField('tel')" />
+    @if (isInvalidField('tel')) {
+      <div class="invalid-feedback">
+        @if (registerForm.get('tel')?.hasError('required')) {
+          <div>El teléfono es obligatorio</div>
+        }
+        @if (registerForm.get('tel')?.hasError('pattern')) {
+          <div>Introduce un móvil español válido</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div formGroupName="datosCuenta" class="row g-3 mt-2">
+    <h4 class="col-12">Datos de la cuenta</h4>
+
+    <div class="col-md-4">
+      <label for="nombre-usuario" class="form-label">Nombre de usuario <span class="text-danger">*</span></label>
+      <input id="nombre-usuario" type="text" formControlName="nombreUsuario" class="form-control"
+        [class.is-invalid]="isInvalidField('datosCuenta.nombreUsuario')" />
+      @if (isInvalidField('datosCuenta.nombreUsuario')) {
+        <div class="invalid-feedback">
+          @if (registerForm.get('datosCuenta.nombreUsuario')?.hasError('required')) {
+            <div>El nombre de usuario es obligatorio</div>
+          }
+          @if (registerForm.get('datosCuenta.nombreUsuario')?.hasError('minlength') || registerForm.get('datosCuenta.nombreUsuario')?.hasError('maxlength')) {
+            <div>Entre 4 y 15 caracteres</div>
+          }
+          @if (registerForm.get('datosCuenta.nombreUsuario')?.hasError('pattern')) {
+            <div>Debe empezar por letra y no contener espacios ni símbolos</div>
+          }
         </div>
-    </fieldset>
+      }
+    </div>
+
+    <div class="col-md-4">
+      <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+      <input id="email" type="email" formControlName="email" class="form-control"
+        [class.is-invalid]="isInvalidField('datosCuenta.email')" />
+      @if (isInvalidField('datosCuenta.email')) {
+        <div class="invalid-feedback">
+          @if (registerForm.get('datosCuenta.email')?.hasError('required')) {
+            <div>El email es obligatorio</div>
+          }
+          @if (registerForm.get('datosCuenta.email')?.hasError('email')) {
+            <div>Formato de email no válido</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="col-md-4">
+      <label for="contrasenia" class="form-label">Contraseña <span class="text-danger">*</span></label>
+      <input id="contrasenia" type="password" formControlName="contrasenia" class="form-control"
+        [class.is-invalid]="isInvalidField('datosCuenta.contrasenia')" />
+      @if (isInvalidField('datosCuenta.contrasenia')) {
+        <div class="invalid-feedback">
+          @if (registerForm.get('datosCuenta.contrasenia')?.hasError('required')) {
+            <div>La contraseña es obligatoria</div>
+          }
+          @if (registerForm.get('datosCuenta.contrasenia')?.hasError('minlength')) {
+            <div>Mínimo 8 caracteres</div>
+          }
+          @if (registerForm.get('datosCuenta.contrasenia')?.hasError('maxlength')) {
+            <div>Máximo 20 caracteres</div>
+          }
+          @if (registerForm.get('datosCuenta.contrasenia')?.hasError('pattern')) {
+            <div>Debe incluir mayúscula, minúscula, número y carácter especial</div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <div formGroupName="preferenciasCurso" class="row g-3 mt-2">
+    <h4 class="col-12">Preferencias del curso</h4>
+
+    <div class="col-md-4">
+      <label for="curso" class="form-label">Curso de interés <span class="text-danger">*</span></label>
+      <select id="curso" formControlName="curso" class="form-select"
+        [class.is-invalid]="isInvalidField('preferenciasCurso.curso')">
+        <option value="">-- Selecciona un curso --</option>
+        <option value="angular">Desarrollo Web con Angular</option>
+        <option value="java">Backend con Java y Spring</option>
+        <option value="android">Desarrollo Móvil en Android</option>
+      </select>
+      @if (isInvalidField('preferenciasCurso.curso')) {
+        <div class="invalid-feedback">
+          <div>Selecciona un curso</div>
+        </div>
+      }
+    </div>
+
+    <div class="col-md-4">
+      <label for="horas" class="form-label">Horas disponibles / semana <span class="text-danger">*</span></label>
+      <input id="horas" type="number" formControlName="horas" class="form-control"
+        [class.is-invalid]="isInvalidField('preferenciasCurso.horas')" />
+      @if (isInvalidField('preferenciasCurso.horas')) {
+        <div class="invalid-feedback">
+          @if (registerForm.get('preferenciasCurso.horas')?.hasError('required')) {
+            <div>Las horas son obligatorias</div>
+          }
+          @if (registerForm.get('preferenciasCurso.horas')?.hasError('min') || registerForm.get('preferenciasCurso.horas')?.hasError('max')) {
+            <div>Entre 2 y 40 horas</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="col-md-4">
+      <label for="codigo-postal" class="form-label">Código postal <span class="text-danger">*</span></label>
+      <input id="codigo-postal" type="text" formControlName="codigoPostal" class="form-control"
+        [class.is-invalid]="isInvalidField('preferenciasCurso.codigoPostal')" />
+      @if (isInvalidField('preferenciasCurso.codigoPostal')) {
+        <div class="invalid-feedback">
+          @if (registerForm.get('preferenciasCurso.codigoPostal')?.hasError('required')) {
+            <div>El código postal es obligatorio</div>
+          }
+          @if (registerForm.get('preferenciasCurso.codigoPostal')?.hasError('pattern')) {
+            <div>Código postal no válido</div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="col-12 mt-4">
+    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Registrarse</button>
+  </div>
+
 </form>
