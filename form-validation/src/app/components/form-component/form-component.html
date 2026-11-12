@@ -1,0 +1,11 @@
+<form [formGroup] = "registerForm" (ngSubmit)="onSubmit()">
+
+    <fieldset>
+        <legend>Formulario de Registro</legend>
+        <div>
+            <label for="firstName">Nombre:</label>
+            <input id="firstName" formControlName="firstName">
+            
+        </div>
+    </fieldset>
+</form>

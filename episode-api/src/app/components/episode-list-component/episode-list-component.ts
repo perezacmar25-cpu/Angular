@@ -27,8 +27,7 @@ export class EpisodeListComponent implements OnInit{
 
   openEpisodeModal(id:number){
     this.episodeService.getOne(id.toString()).subscribe(resp => {
-      const modalRef = this.modalService.open(EpisodeModal)
-      modalRef.componentInstance.episode = resp;
+      return this.modalService.open(EpisodeModal)
     })
 
   }
